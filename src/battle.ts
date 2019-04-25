@@ -1176,6 +1176,13 @@ class Battle {
 		if (this.startCallback) this.startCallback(this);
 	}
 	winner(winner?: string) {
+        alert("Function Game.winner() was called.\nArgument: ["
+            + winner + "]\n"+
+
+            "p1: " + this.p1.name + "\n" +
+            "p2: " + this.p2.name + "\n");
+
+
 		this.log(['win', winner || '']);
 		this.ended = true;
 	}
@@ -1195,7 +1202,7 @@ class Battle {
 		this.scene.updateWeather(true);
 	}
 	setTurn(turnNum: string | number) {
-        alert("Calling battle.setTurn()\nargument: [" + turnNum + "]");
+        // alert("Calling battle.setTurn()\nargument: [" + turnNum + "]");
 		turnNum = parseInt(turnNum as string, 10);
 		if (turnNum === this.turn + 1) {
 			this.endLastTurnPending = true;
