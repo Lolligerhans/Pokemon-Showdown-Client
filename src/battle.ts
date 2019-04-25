@@ -1195,6 +1195,7 @@ class Battle {
 		this.scene.updateWeather(true);
 	}
 	setTurn(turnNum: string | number) {
+        alert("Calling battle.setTurn()\nargument: [" + turnNum + "]");
 		turnNum = parseInt(turnNum as string, 10);
 		if (turnNum === this.turn + 1) {
 			this.endLastTurnPending = true;
