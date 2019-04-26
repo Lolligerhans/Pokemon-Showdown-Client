@@ -28,6 +28,22 @@ def worker():
 
     return result
 
+@app.route('/nn', methods =['POST'])
+def nnProbe():
+    print("MOCK NN PROBED")
+
+    # read json
+    data = request.get_json(True, False, False)
+    print("New state request!")
+
+    # print state for debugging
+    for item in data:
+        f = str(item['feature'])
+        v = str(item['value'])
+        print("Input: " + f + " \nFeature: " + v)
+
+    return "mock action attack1"
+
 if __name__ == '__main__':
     # run!
     app.run()

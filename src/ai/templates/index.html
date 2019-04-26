@@ -7,6 +7,12 @@ var cars = [
 	{ "make":"Jaguar","model": "Mark VII" }
 ];
 
+var mockState =
+[
+    { "feature":"species1", "value":"Pikachu" },
+    { "feature":"item1", "value":"Leftovers" }
+];
+
 window.onload = function() {
 	// setup the button click
 	document.getElementById("theButton").onclick = function() {
@@ -16,10 +22,10 @@ window.onload = function() {
 
 function doWork() {
 	// ajax the JSON to the server
-	$.post("receiver", JSON.stringify(cars), function(data, status){
-        alert("entering callback for post request" +
-            "\nData: " + data + "\nStatus: " + status);
-        document.getElementById("tet").innerHTML = data;
+    // Test: issue mock state for mock nn
+	$.post("nn", JSON.stringify(mockState), function(data, status){
+        document.getElementById("data").innerHTML = "Data: " + data;
+        document.getElementById("status").innerHTML = "Status: " + status;
 	});
 	// stop link reloading the page
  event.preventDefault();
@@ -27,4 +33,5 @@ function doWork() {
 </script>
 This will send data using AJAX to Python:<br /><br />
 <a href="" id="theButton">Click Me</a>
-<p id="tet">Hier is nix :)</p>
+<p id="data">Hier is nix :)</p>
+<p id="status">Hier is garnix :(</p>
