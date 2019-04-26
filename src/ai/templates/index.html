@@ -17,8 +17,8 @@ window.onload = function() {
 function doWork() {
 	// ajax the JSON to the server
 	$.post("receiver", JSON.stringify(cars), function(data, status){
-        alert("entering callback for post request\n" +
-            "Data:" + data + "\nStatus: " + status);
+        alert("entering callback for post request" +
+            "\nData: " + data + "\nStatus: " + status);
         document.getElementById("tet").innerHTML = data;
 	});
 	// stop link reloading the page
@@ -27,4 +27,4 @@ function doWork() {
 </script>
 This will send data using AJAX to Python:<br /><br />
 <a href="" id="theButton">Click Me</a>
-<p id="tet"></p>
+<p id="tet">Hier is nix :)</p>
