@@ -40,6 +40,14 @@ def nnProbe():
 
     return "mock action attack1"
 
+@app.route('/innput', methods=['GET'])
+def jsonpTest():
+    print("New JSONP testrequest")
+    print("\tfeature: " + str(request.args['feature']))
+    print("\tvalue: " + str(request.args['value']))
+
+    return str(request.args['callback']) + "(\"mock cb payload arg\");"
+
 if __name__ == '__main__':
     # run!
     app.run()

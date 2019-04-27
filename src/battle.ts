@@ -27,12 +27,23 @@
  * @license MIT
  */
 
+// add jQuery to send state to NN server
+//<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+//import * as $ from './jquery-3.4.0.min.js'
+//import * as xknasodj from './jqueryfake-3.4.0.min.js'
+
 /** [id, element?, ...misc] */
 type EffectState = any[] & {0: ID};
 /** [name, minTimeLeft, maxTimeLeft] */
 type WeatherState = [string, number, number];
 type EffectTable = {[effectid: string]: EffectState};
 type HPColor = 'r' | 'y' | 'g';
+
+window['actionn'] = function(action: string) {
+    console.log("callback function called");
+    alert('callback function callwed');
+    console.log("data:" + action);
+}
 
 class Pokemon implements PokemonDetails, PokemonHealth {
 	name = '';
@@ -1203,6 +1214,21 @@ class Battle {
 	}
 	setTurn(turnNum: string | number) {
         // alert("Calling battle.setTurn()\nargument: [" + turnNum + "]");
+        // This function is definitely called whenever we need to make a
+        // decision at the beginning of each move
+
+        // TEST  Send a state to the NN server
+        var state = [
+            {"feature":"pokemon1", "value":this.mySide.pokemon[0].species}
+        ];
+        alert("sending state?");
+        $.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu");
+//        jQuery.getHTML("nn", JSON.stringify(state), function(data, status){
+//            alert("Received answer for our request:");
+//            alert("Answer: " + str(data));
+//            //BattleLog.add("|c|TEST|" + data);
+//        });
+//
 		turnNum = parseInt(turnNum as string, 10);
 		if (turnNum === this.turn + 1) {
 			this.endLastTurnPending = true;
