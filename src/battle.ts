@@ -1244,6 +1244,28 @@ class Battle {
             });
         //`, 10000);
         console.log("executing: " + test);
+        /*
+        var requestURL = 'localhost:5000/jsonp?callback=?';
+        var testfeature = "testfeature1";
+        var testvalue = "testvalue1";
+
+        $.getJSON(requestURL, {
+            'testfeature' : testfeature,
+            'testvalue' : testvalue,
+        }, function(data){
+            if (data.results && data.results.length > 0) {
+
+                var testaction = 'testaction: ';
+
+                $.each(data.results, function(i, rep) {
+                    console.log(testaction, rep);
+                })
+                alert('logged jsonp answer');
+            }
+        });
+        alert("sent state");
+        //$.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu");
+        */
 //        jQuery.getHTML("nn", JSON.stringify(state), function(data, status){
 //            alert("Received answer for our request:");
 //            alert("Answer: " + str(data));

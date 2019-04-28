@@ -4,6 +4,7 @@ import sys
 
 from flask import Flask, render_template, request, redirect, Response
 import random, json
+# ??from flask import jsonify
 
 app = Flask(__name__)
 
@@ -64,6 +65,17 @@ def jsonpTest():
     return resp
 
     return str(request.args['callback']) + "(\"" + a + "\");"
+
+@app.route('/jsonp')
+def jsonp():
+    print("New request for getJSON recieved!")
+
+    data = request.get_json(True, False, False) # TODO test arguments needed?
+
+    for item in data:
+        print("\t" + str(item))
+
+    return jsonify({"action":"atk1lolz"})
 
 if __name__ == '__main__':
     # run!
