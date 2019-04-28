@@ -46,7 +46,24 @@ def jsonpTest():
     print("\tfeature: " + str(request.args['feature']))
     print("\tvalue: " + str(request.args['value']))
 
-    return str(request.args['callback']) + "(\"mock cb payload arg\");"
+    a = ''
+    if  ( request.args['feature'] == "species0" ):
+        print("spec0")
+        a = "rcv sp0 (async)"
+    elif( request.args['feature'] == "species1" ):
+        a = "rcv sp1"
+    elif( request.args['feature'] == "species2" ):
+        a = "rcv sp2"
+    else:
+        a = "UNKNOWN FEATURE"
+
+
+    respStr = str(request.args['callback']) + "(\"" + a + "\");"
+    resp = app.make_response(respStr)
+    resp.mimetype = "application/javascript"
+    return resp
+
+    return str(request.args['callback']) + "(\"" + a + "\");"
 
 if __name__ == '__main__':
     # run!

@@ -40,8 +40,7 @@ type EffectTable = {[effectid: string]: EffectState};
 type HPColor = 'r' | 'y' | 'g';
 
 window['actionn'] = function(action: string) {
-    console.log("callback function called");
-    alert('callback function callwed');
+    console.log('callback function called');
     console.log("data:" + action);
 }
 
@@ -1219,10 +1218,32 @@ class Battle {
 
         // TEST  Send a state to the NN server
         var state = [
-            {"feature":"pokemon1", "value":this.mySide.pokemon[0].species}
+            {"feature":"pokemon1", "value":this.mySide.pokemon[0].species},
+            {"feature":"move1A", "value":this.mySide.pokemon[0].species}
+
         ];
-        alert("sending state?");
-        $.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu");
+        var act = '';
+        console.log("before ajaxing synchronously");
+        $.ajax({
+            url: 'http://localhost:5000/innput?feature=species0&callback=actionn&value=Pikachu0',
+            async: false,
+            dataType: "script",
+        });
+        console.log("after ajaxing synchronously");
+
+        $.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu", function(data, status, jqxhr){
+            console.log("callback enter");
+            eval(data);
+            console.log("callback exit");
+            });
+        //setTimeout(`
+        $.getScript("http://localhost:5000/innput?feature=species2&callback=actionn&value=Pikachu2", function(data, status, jqxhr){
+            console.log("enter cb2");
+            eval(data);
+            console.log("exit cb2");
+            });
+        //`, 10000);
+        console.log("executing: " + test);
 //        jQuery.getHTML("nn", JSON.stringify(state), function(data, status){
 //            alert("Received answer for our request:");
 //            alert("Answer: " + str(data));
