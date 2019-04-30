@@ -49,7 +49,6 @@ def jsonpTest():
 
     a = ''
     if  ( request.args['feature'] == "species0" ):
-        print("spec0")
         a = "rcv sp0 (async)"
     elif( request.args['feature'] == "species1" ):
         a = "rcv sp1"

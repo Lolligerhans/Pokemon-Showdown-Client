@@ -44,6 +44,19 @@ window['actionn'] = function(action: string) {
     console.log("data:" + action);
 }
 
+function sendFeature(feature: string, value: string)
+{
+    $.ajax
+    ({
+        url:"http://localhost:5000/innput" +
+            "?callback=actionn" +
+            "&feature=" + feature +
+            "&value="   + value,
+        async: false,
+        dataType: "script"
+    });
+}
+
 class Pokemon implements PokemonDetails, PokemonHealth {
 	name = '';
 	species = '';
@@ -1220,8 +1233,8 @@ class Battle {
         var state = [
             {"feature":"pokemon1", "value":this.mySide.pokemon[0].species},
             {"feature":"move1A", "value":this.mySide.pokemon[0].species}
-
         ];
+        /*
         var act = '';
         console.log("before ajaxing synchronously");
         $.ajax({
@@ -1230,7 +1243,39 @@ class Battle {
             dataType: "script",
         });
         console.log("after ajaxing synchronously");
+        */
 
+        var P = this.mySide.pokemon;
+        var p = this.yourSide.pokemon;
+
+        console.log("before testing to send actual pokemon" +
+                    "values synchronously");
+        $.ajax({
+            url:"http://localhost:5000/innput" +
+                "?feature=species0" + 
+                "&callback=actionn" +
+                "&value=" + this.mySide.pokemon[0].species,
+            async: false,
+            dataType: "script",
+        });
+        console.log("after ajaxing real (1/0) test synchronously");
+
+        console.log("before testing to send actual pokemon" +
+                    "values synchronously");
+        $.ajax({
+            url:"http://localhost:5000/innput" +
+                "?feature=species1" +
+                "&callback=actionn" +
+                "&value=" + this.mySide.pokemon[1].species,
+            async: false,
+            dataType: "script",
+        });
+        console.log("after ajaxing real (1/0) test synchronously");
+
+        sendFeature("species2", this.mySide.pokemon[2].species);
+        console.log("sending 3rd species using server pokemon data");
+        sendFeature("species3", this.myPokemon[3].species);
+        /*
         $.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu", function(data, status, jqxhr){
             console.log("callback enter");
             eval(data);
@@ -1244,7 +1289,7 @@ class Battle {
             });
         //`, 10000);
         console.log("executing: " + test);
-        /*
+
         var requestURL = 'localhost:5000/jsonp?callback=?';
         var testfeature = "testfeature1";
         var testvalue = "testvalue1";
@@ -1264,8 +1309,9 @@ class Battle {
             }
         });
         alert("sent state");
-        //$.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu");
         */
+
+        //$.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu");
 //        jQuery.getHTML("nn", JSON.stringify(state), function(data, status){
 //            alert("Received answer for our request:");
 //            alert("Answer: " + str(data));
