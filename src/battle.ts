@@ -1281,7 +1281,7 @@ class Battle {
         {
             let f:string = spec + ctr.toString();
             let v:string = "";
-            if( this.myPokemon[i] )
+            if( typeof this.myPokemon[i] !== "undefined" )
                 v = this.myPokemon[i].species;
             else
                 v = undef;
@@ -1294,7 +1294,7 @@ class Battle {
         {
             let f:string = spec + ctr.toString();
             let v:string = "";
-            if( this.yourSide.pokemon[i] )
+            if( typeof this.yourSide.pokemon[i] !== "undefined" )
                 v = this.yourSide.pokemon[i].species;
             else
                 v = undef;
@@ -1310,7 +1310,8 @@ class Battle {
             {
                 let f:string = mov + ctr.toString();
                 let v:string = "";
-                if( this.myPokemon[mon].moves[move] )
+                if( typeof this.myPokemon[mon]             !== "undefiend" &&
+                    typeof this.myPokemon[mon].moves[move] !== "undefined" )
                     v = this.myPokemon[mon].moves[move];
                 else
                     v = undef;
@@ -1326,7 +1327,8 @@ class Battle {
             {
                 let f:string = mov + ctr.toString();
                 let v:string = "";
-                if( this.yourSide.pokemon[mon].moves[move] )
+                if( typeof this.yourSide.pokemon[mon]      !== "undefined" &&
+                    typeof this.myPokemon[mon].moves[move] !== "undefined" )
                     v = this.yourSide.pokemon[mon].moves[move];
                 else
                     v = undef;
