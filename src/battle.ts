@@ -40,8 +40,7 @@ type EffectTable = {[effectid: string]: EffectState};
 type HPColor = 'r' | 'y' | 'g';
 
 window['actionn'] = function(action: string) {
-    console.log('callback function called');
-    console.log("data:" + action);
+    console.log("Received: " + action);
 }
 
 function sendFeature(feature: string, value: string)

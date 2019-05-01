@@ -47,15 +47,18 @@ def jsonpTest():
     print("\tfeature: " + str(request.args['feature']))
     print("\tvalue: " + str(request.args['value']))
 
-    a = ''
-    if  ( request.args['feature'] == "species0" ):
-        a = "rcv sp0 (async)"
-    elif( request.args['feature'] == "species1" ):
-        a = "rcv sp1"
-    elif( request.args['feature'] == "species2" ):
-        a = "rcv sp2"
-    else:
-        a = request.args["feature"] + " -> " + request.args["value"] + ".anyMove"
+    a = ""
+    a = "ACK " + request.args["feature"] + ":" + request.args["value"];
+
+
+    #if  ( request.args['feature'] == "species0" ):
+    #    a = "rcv sp0 (async)"
+    #elif( request.args['feature'] == "species1" ):
+    #    a = "rcv sp1"
+    #elif( request.args['feature'] == "species2" ):
+    #    a = "rcv sp2"
+    #else:
+    #    a = request.args["feature"] + " -> " + request.args["value"] + ".anyMove"
 
 
     respStr = str(request.args['callback']) + "(\"" + a + "\");"
