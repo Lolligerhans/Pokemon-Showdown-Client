@@ -55,7 +55,7 @@ def jsonpTest():
     elif( request.args['feature'] == "species2" ):
         a = "rcv sp2"
     else:
-        a = "UNKNOWN FEATURE"
+        a = request.args["feature"] + " -> " + request.args["value"] + ".anyMove"
 
 
     respStr = str(request.args['callback']) + "(\"" + a + "\");"
