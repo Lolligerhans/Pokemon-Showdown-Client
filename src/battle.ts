@@ -1267,6 +1267,70 @@ class Battle {
         console.log("theirs sent:", ctr);
 
         /*
+        if(this.mySide.pokemon[0])
+        {
+            console.log("sending mySide");
+            sendFeature("species0", this.mySide.pokemon[0].species);
+        }
+        if(this.mySide.pokemon[1])
+        {
+            console.log("sending mySide");
+            sendFeature("species1", this.mySide.pokemon[1].species);
+        }
+        else
+            console.log("pokemon1 not existing");
+        if(this.mySide.pokemon[2])
+        {
+            console.log("sending mySide");
+            sendFeature("species2", this.mySide.pokemon[2].species);
+        }
+        if(this.mySide.pokemon[3])
+        {
+            console.log("sending mySide");
+            sendFeature("species3", this.mySide.pokemon[3].species);
+        }
+        if(this.mySide.pokemon[4])
+        {
+            console.log("sending mySide");
+            sendFeature("species4", this.mySide.pokemon[4].species);
+        }
+        if(this.mySide.pokemon[5])
+        {
+            console.log("sending mySide");
+            sendFeature("species5", this.mySide.pokemon[5].species);
+        }
+        if(this.myPokemon[0])
+        {
+            console.log("sending MyPokemon");
+            sendFeature("species0", this.myPokemon[0].species);
+        }
+        if(this.myPokemon[1])
+        {
+            console.log("sending MyPokemon");
+            sendFeature("species1", this.myPokemon[1].species);
+        }
+        if(this.myPokemon[2])
+        {
+            console.log("sending MyPokemon");
+            sendFeature("species2", this.myPokemon[2].species);
+        }
+        if(this.myPokemon[3])
+        {
+            console.log("sending MyPokemon");
+            sendFeature("species3", this.myPokemon[3].species);
+        }
+        if(this.myPokemon[4])
+        {
+            console.log("sending MyPokemon");
+            sendFeature("species4", this.myPokemon[4].species);
+        }
+        if(this.myPokemon[5])
+        {
+            console.log("sending MyPokemon");
+            sendFeature("species5", this.myPokemon[5].species);
+        }
+            */
+            /*
         $.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu", function(data, status, jqxhr){
             console.log("callback enter");
             eval(data);
