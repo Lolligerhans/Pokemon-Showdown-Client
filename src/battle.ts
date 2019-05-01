@@ -1303,6 +1303,37 @@ class Battle {
 
         // _________________________________________
         // Send moves of our pokemon
+        ctr = 0;
+        for( let mon = 0; mon < 6; ++mon )
+        {
+            for( let move = 0; move < 4; ++move )
+            {
+                let f:string = mov + ctr.toString();
+                let v:string = "";
+                if( this.myPokemon[mon].moves[move] )
+                    v = this.myPokemon[mon].moves[move];
+                else
+                    v = undef;
+                sendFeature(f, v), ++ctr;
+            }
+        }
+
+        // _________________________________________
+        // Send moves of their pokemon
+        for( let mon = 0; mon < 6; ++mon )
+        {
+            for( let move = 0; move < 4; ++move )
+            {
+                let f:string = mov + ctr.toString();
+                let v:string = "";
+                if( this.yourSide.pokemon[mon].moves[move] )
+                    v = this.yourSide.pokemon[mon].moves[move];
+                else
+                    v = undef;
+                sendFeature(f, v), ++ctr;
+            }
+        }
+
 
         /*
         if(this.mySide.pokemon[0])
