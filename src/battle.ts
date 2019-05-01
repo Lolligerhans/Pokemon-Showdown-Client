@@ -40,7 +40,7 @@ type EffectTable = {[effectid: string]: EffectState};
 type HPColor = 'r' | 'y' | 'g';
 
 window['actionn'] = function(action: string) {
-    console.log("Received: " + action);
+    console.log(action);
 }
 
 function sendFeature(feature: string, value: string)
@@ -1255,25 +1255,25 @@ class Battle {
 
         // The value of unknown features will be set to this special value.
         // Ex.: Undisclosed opponents moves, pokemon or items.
-        let undef:string = "undefined";
+        const undef:string = "undefined";
 
-        // TODO replace lets with dictionary [verbal description -> encoding string]
+        // TODO replace consts with dictionary [verbal description -> encoding string]
 
         // Features which must be decoded as a pokemon species will begin with
         // this string followed by the species counter. There are 12 species in
         // toal (6 for each side).
-        let spec:string = "species";
+        const spec:string = "species";
 
         // Features decoded as moves will begin with this string followed by
         // the move counter. There are 48 moves in total (4 for each pokemon).
-        let mov:string = "move";
+        const mov:string = "move";
 
-        let it:string = "item";
-        let ab:string = "ability";
+        const it:string = "item";
+        const ab:string = "ability";
 
         // PP features remain unencoded and will be transmitted and used as
         // their own (absolute) value.
-        let pp:string = "pp";
+        const pp:string = "pp";
 
         // _________________________________________
         // Send pokemon on our side
@@ -1321,21 +1321,35 @@ class Battle {
 
         // _________________________________________
         // Send moves of their pokemon
+
+        //  TODO does not work lol
+        /*
         for( let mon = 0; mon < 6; ++mon )
         {
-            for( let move = 0; move < 4; ++move )
+            let f:string = mov + ctr.toString();
+            let v:string = "";
+            if( typeof this.yourSide.pokemon[mon] !== "undefined" )
             {
-                let f:string = mov + ctr.toString();
-                let v:string = "";
-                if( typeof this.yourSide.pokemon[mon]      !== "undefined" &&
-                    typeof this.myPokemon[mon].moves[move] !== "undefined" )
-                    v = this.yourSide.pokemon[mon].moves[move];
-                else
-                    v = undef;
-                sendFeature(f, v), ++ctr;
+                console.log("their pokemon exists");
+                for( const entry of this.yourPokemon[mon].moves )
+                {
+                    console.log("their move exists");
+                    console.log("PK " + mon.toStrong() + ": " + entry);
+                }
+                for( const entry of this.yourPokemon[mon].moveTrack )
+                {
+                    console.log("move TRACK exists");
+                    console.log("PK " + mon.toString() + ". " + entry);
+                }
             }
+            else
+            {
+                console.log("their mon does not exist");
+                v = undef;
+            }
+            sendFeature(f, v), ++ctr;
         }
-
+        */
 
         /*
         if(this.mySide.pokemon[0])
