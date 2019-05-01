@@ -1249,9 +1249,9 @@ class Battle {
         for( let p of this.myPokemon )
         {
             if( p )
-                sendFeature("species" + str(ctr), p.species);
+                sendFeature("species" + ctr.toString(), p.species);
             else
-                console.log("skipping myPokemon aka [" + str(ctr) + "]");
+                console.log("skipping myPokemon aka [" + ctr.toString() + "]");
             ++ctr;
         }
         console.log("ours sent:", ctr);
@@ -1259,12 +1259,13 @@ class Battle {
         for( let p of this.yourSide.pokemon )
         {
             if( p )
-                sendFeature("species" + str(ctr), p.species);
+                sendFeature("species" + ctr.toString(), p.species);
             else
-                console.log("skipping youPokemon aka [" + str(ctr) + "]");
+                console.log("skipping youPokemon aka [" + ctr.toString() + "]");
             ++ctr;
         }
-        console.log("theirs sent:", ctr);
+        console.log("theirs sent:", ctr - 6);
+        ctr = 12;
 
         /*
         if(this.mySide.pokemon[0])
