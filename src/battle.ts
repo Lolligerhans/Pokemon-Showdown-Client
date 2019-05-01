@@ -1245,7 +1245,13 @@ class Battle {
         console.log("after ajaxing synchronously");
         */
 
+        // _____________________________________________________________________
+        // Send game state to NN server
+
         var ctr = 0;
+
+        // _________________________________________
+        // Send pokemon on our side
         for( let p of this.myPokemon )
         {
             if( p )
@@ -1255,7 +1261,12 @@ class Battle {
             ++ctr;
         }
         console.log("ours sent:", ctr);
-        ctr = 6;
+        if( ctr > 6 ) alert("ctr >6 RIP bruh");
+        for( ; ctr < 6; ++ctr)
+            sendFeature("species" + ctr.toString(), "undefined");
+
+        // _________________________________________
+        // Send pokemon on their side
         for( let p of this.yourSide.pokemon )
         {
             if( p )
@@ -1265,7 +1276,9 @@ class Battle {
             ++ctr;
         }
         console.log("theirs sent:", ctr - 6);
-        ctr = 12;
+        if( ctr > 12 ) alert("ctr >12 RIP bruh");
+        for( ; ctr < 12; ++ctr)
+            sendFeature("species" + ctr.toString(), "undefined");
 
         /*
         if(this.mySide.pokemon[0])
