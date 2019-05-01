@@ -1248,37 +1248,62 @@ class Battle {
         // _____________________________________________________________________
         // Send game state to NN server
 
+        // _________________________________________
+        // Variables
+
+        // Network inputs of the same type are sent as "type[counter]"
         var ctr = 0;
+
+        // The value of unknown features will be set to this special value.
+        // Ex.: Undisclosed opponents moves, pokemon or items.
+        let undef:string = "undefined";
+
+        // TODO replace lets with dictionary [verbal description -> encoding string]
+
+        // Features which must be decoded as a pokemon species will begin with
+        // this string followed by the species counter. There are 12 species in
+        // toal (6 for each side).
+        let spec:string = "species";
+
+        // Features decoded as moves will begin with this string followed by
+        // the move counter. There are 48 moves in total (4 for each pokemon).
+        let mov:string = "move";
+
+        let it:string = "item";
+        let ab:string = "ability";
+
+        // PP features remain unencoded and will be transmitted and used as
+        // their own (absolute) value.
+        let pp:string = "pp";
 
         // _________________________________________
         // Send pokemon on our side
-        for( let p of this.myPokemon )
+        for( let i = 0; i < 6; ++i)
         {
-            if( p )
-                sendFeature("species" + ctr.toString(), p.species);
+            let f:string = spec + ctr.toString();
+            let v:string = "";
+            if( this.myPokemon[i] )
+                v = this.myPokemon[i].species;
             else
-                console.log("skipping myPokemon aka [" + ctr.toString() + "]");
-            ++ctr;
+                v = undef;
+            sendFeature(f, v), ++ctr;
         }
-        console.log("ours sent:", ctr);
-        if( ctr > 6 ) alert("ctr >6 RIP bruh");
-        for( ; ctr < 6; ++ctr)
-            sendFeature("species" + ctr.toString(), "undefined");
 
         // _________________________________________
         // Send pokemon on their side
-        for( let p of this.yourSide.pokemon )
+        for( let i = 0; i < 6; ++i)
         {
-            if( p )
-                sendFeature("species" + ctr.toString(), p.species);
+            let f:string = spec + ctr.toString();
+            let v:string = "";
+            if( this.yourSide.pokemon[i] )
+                v = this.yourSide.pokemon[i].species;
             else
-                console.log("skipping youPokemon aka [" + ctr.toString() + "]");
-            ++ctr;
+                v = undef;
+            sendFeature(f, v), ++ctr;
         }
-        console.log("theirs sent:", ctr - 6);
-        if( ctr > 12 ) alert("ctr >12 RIP bruh");
-        for( ; ctr < 12; ++ctr)
-            sendFeature("species" + ctr.toString(), "undefined");
+
+        // _________________________________________
+        // Send moves of our pokemon
 
         /*
         if(this.mySide.pokemon[0])
