@@ -1245,36 +1245,27 @@ class Battle {
         console.log("after ajaxing synchronously");
         */
 
-        var P = this.mySide.pokemon;
-        var p = this.yourSide.pokemon;
+        var ctr = 0;
+        for( let p of this.myPokemon )
+        {
+            if( p )
+                sendFeature("species" + str(ctr), p.species);
+            else
+                console.log("skipping myPokemon aka [" + str(ctr) + "]");
+            ++ctr;
+        }
+        console.log("ours sent:", ctr);
+        ctr = 6;
+        for( let p of this.yourSide.pokemon )
+        {
+            if( p )
+                sendFeature("species" + str(ctr), p.species);
+            else
+                console.log("skipping youPokemon aka [" + str(ctr) + "]");
+            ++ctr;
+        }
+        console.log("theirs sent:", ctr);
 
-        console.log("before testing to send actual pokemon" +
-                    "values synchronously");
-        $.ajax({
-            url:"http://localhost:5000/innput" +
-                "?feature=species0" + 
-                "&callback=actionn" +
-                "&value=" + this.mySide.pokemon[0].species,
-            async: false,
-            dataType: "script",
-        });
-        console.log("after ajaxing real (1/0) test synchronously");
-
-        console.log("before testing to send actual pokemon" +
-                    "values synchronously");
-        $.ajax({
-            url:"http://localhost:5000/innput" +
-                "?feature=species1" +
-                "&callback=actionn" +
-                "&value=" + this.mySide.pokemon[1].species,
-            async: false,
-            dataType: "script",
-        });
-        console.log("after ajaxing real (1/0) test synchronously");
-
-        sendFeature("species2", this.mySide.pokemon[2].species);
-        console.log("sending 3rd species using server pokemon data");
-        sendFeature("species3", this.myPokemon[3].species);
         /*
         $.getScript("http://localhost:5000/innput?feature=species1&callback=actionn&value=Pikachu", function(data, status, jqxhr){
             console.log("callback enter");
@@ -1318,6 +1309,8 @@ class Battle {
 //            //BattleLog.add("|c|TEST|" + data);
 //        });
 //
+        console.log("now returning to normal function\n----------------------");
+
 		turnNum = parseInt(turnNum as string, 10);
 		if (turnNum === this.turn + 1) {
 			this.endLastTurnPending = true;
